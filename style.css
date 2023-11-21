@@ -5,7 +5,7 @@ body {
 
 main {
   display: grid;
-  height: 100vh;
+  height: 100dvh;
   grid-template-rows: auto min-content;
 }
 
@@ -18,7 +18,7 @@ main {
 app-start {
   grid-column: 1/2;
   grid-row: 2/3;
-  padding: 5rem 1rem;
+  padding: 1rem 1rem;
   z-index: 401;
 }
 
