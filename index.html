@@ -17,18 +17,33 @@
   </head>
   <body>
 
-    <main>
+    <div class="wrapper">
       <div class="map" id="map"></div>
-    </main> 
+      <main>
+        
+      </main>
+    </div> 
       
   
 
     <template id="ignition">
-      <section class="ignition">
+      <section>
         <button type="button" class="start">Start</button>
         <button hidden type="button" class="stop">Stop</button>
         <app-currently></app-currently>
       </section>
+    </template>
+
+    <template id="session-summary">
+      <dialog open>
+        <h3>Summary</h3>
+        <p>Session Timings</p>
+        <p>Start: <span class="starttime"></span></p>
+        <button type="button" class="close">Close</button>
+
+      </dialog>
+      
+
     </template>
   </body>
 </html>

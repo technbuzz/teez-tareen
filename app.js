@@ -1,5 +1,6 @@
 import { Currently } from "./components/currently.js";
 import { Start } from "./components/start.js";
+import { Summary } from "./components/summary.js";
 import { router } from "./services/Router.js";
 import store from "./services/Store.js";
 

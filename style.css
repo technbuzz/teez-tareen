@@ -3,7 +3,7 @@ body {
   padding: 0;
 }
 
-main {
+.wrapper {
   display: grid;
   height: 100dvh;
   grid-template-rows: auto min-content;
@@ -15,7 +15,7 @@ main {
   grid-row: 1/3;
 }
 
-app-start {
+main {
   grid-column: 1/2;
   grid-row: 2/3;
   padding: 1rem 1rem;
@@ -25,4 +25,10 @@ app-start {
 button {
   font-size: 1.5rem;
   padding: 0.5em 1em;
+}
+
+dialog {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
 }

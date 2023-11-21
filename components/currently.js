@@ -3,6 +3,11 @@ export class Currently extends HTMLElement {
 
   constructor() {
     super()
+
+    window.addEventListener('appstoppedtracking', (e) => {
+      console.log('app stopped tracking')
+      this.locations = []
+    })
   }
 
   connectedCallback() {
