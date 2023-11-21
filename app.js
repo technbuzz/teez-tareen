@@ -15,10 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   router.goTo('/')
 
-  map.on('locationfound', (e) => {
-    window.dispatchEvent(new CustomEvent('mapMove', { detail: e.target.getCenter() }))
-    console.log(e)
-  })
 })
 
 // Load our component
