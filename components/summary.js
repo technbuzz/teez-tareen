@@ -2,6 +2,7 @@
 export class Summary extends HTMLElement {
   constructor() {
     super()
+
   }
 
   connectedCallback() {
@@ -9,19 +10,27 @@ export class Summary extends HTMLElement {
     const content = template.content.cloneNode(true)
     this.appendChild(content)
 
-
-    const { startTime, endTime, locations } = window.app.store.session
-    this.querySelector('span.totaltime').textContent = (endTime - startTime) / 1000
+    const { startTime, endTime  } = window.app.store.session
+    const dialog = this.querySelector('dialog')
+    this.querySelector('span.totaltime').textContent = this.calculateRelativeTime(startTime, endTime)
+    dialog.showModal()
     const close = this.querySelector('button.close')
     close.addEventListener('click', event => {
+      dialog.close()
       // goto /
       window.app.router.goTo('/')
     })
   }
 
+  calculateRelativeTime(startTime, endTime) {
+    const diff = endTime - startTime
+    const seconds = Math.floor(diff / 1000)
+    const minutes = Math.floor(seconds / 60)
+    return `${minutes} : ${seconds}`
+  }
+
   disconnectedCallback() {
     console.log('summary removed')
-    
   }
 
 }
