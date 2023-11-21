@@ -15,6 +15,7 @@ export class Currently extends HTMLElement {
       marker.setLatLng(location)
 
       renderPolyline(this.locations)
+      window.app.store.session.locations = this.locations
     })
   }
 

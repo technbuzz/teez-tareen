@@ -11,6 +11,7 @@ export class Start extends HTMLElement {
     this.querySelector("button.start").addEventListener("click", event => {
       event.preventDefault()
       console.log('started locating')
+      window.app.store.session.startTime = new Date()
       window.app.map.locate({ watch: true, setView: true, maxZoom: 16 })
 
       this.querySelector("button.start").hidden = true
@@ -21,6 +22,7 @@ export class Start extends HTMLElement {
       event.preventDefault()
       console.log('stopped locating')
       window.app.map.stopLocate()
+      window.app.store.session.endTime = new Date()
 
       this.querySelector("button.start").hidden = false
       this.querySelector("button.stop").hidden = true

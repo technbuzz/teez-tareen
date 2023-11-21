@@ -1,9 +1,11 @@
 import { Currently } from "./components/currently.js";
 import { Start } from "./components/start.js";
 import { router } from "./services/Router.js";
+import store from "./services/Store.js";
 
 window.app = {}
 window.app.router = router
+window.app.store = store
 
 document.addEventListener('DOMContentLoaded', () => {
   const map = L.map('map').setView([51.505, -0.09], 13);
