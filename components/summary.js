@@ -10,7 +10,8 @@ export class Summary extends HTMLElement {
     this.appendChild(content)
 
 
-    this.querySelector('span.starttime').textContent = window.app.store.session.startTime
+    const { startTime, endTime, locations } = window.app.store.session
+    this.querySelector('span.totaltime').textContent = (endTime - startTime) / 1000
     const close = this.querySelector('button.close')
     close.addEventListener('click', event => {
       // goto /
