@@ -42,3 +42,24 @@ dialog {
   background-color: #000000ee;
   opacity: 0.75;
 }
+
+article::backdrop {
+  background-color: transparent;
+}
+
+:popover-open {
+  position: absolute;
+  inset: unset;
+  right: 5px;
+  bottom: 5px;
+  animation: flash 1s ease-in-out forwards;
+  background: yellow; 
+}
+
+@keyframes flash {
+  to {
+    background: white;
+  }
+}
+
+

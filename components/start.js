@@ -16,7 +16,7 @@ export class Start extends HTMLElement {
     this.startEl.addEventListener("click", event => {
       console.log('started locating')
       window.app.store.session.startTime = new Date()
-      window.app.map.locate({ watch: true, setView: true, maxZoom: 16, enableHighAccuracy: true })
+      window.app.map.locate({ watch: true, setView: true, maxZoom: 16, enableHighAccuracy: false })
 
       this.toggleControls()
     })
@@ -27,7 +27,6 @@ export class Start extends HTMLElement {
       window.app.store.session.endTime = new Date()
       window.dispatchEvent(new CustomEvent('appstoppedtracking'))
       window.app.router.goTo('/summary')
-
       this.toggleControls()
     })
   }

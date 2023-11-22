@@ -1,3 +1,5 @@
+import { Debug } from "./debug.js"
+
 export class Currently extends HTMLElement {
   locations = []
 
@@ -19,6 +21,11 @@ export class Currently extends HTMLElement {
       const location = e.latlng
       this.locations.push(location)
       this.marker.setLatLng(location)
+
+      const debug = document.createElement('app-debug')
+      debug.setAttribute('text', JSON.stringify(location))
+      document.body.appendChild(debug)
+
 
       renderPolyline(this.locations)
       window.app.store.session.locations = this.locations
