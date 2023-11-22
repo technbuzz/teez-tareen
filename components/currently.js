@@ -15,7 +15,8 @@ export class Currently extends HTMLElement {
     const renderPolyline = this.initPolyline()
     window.app.map.addLayer(this.marker)
     window.app.map.on('locationfound', (e) => {
-      const location = e.target.getCenter() 
+      // const location = e.target.getCenter() 
+      const location = e.latlng
       this.locations.push(location)
       this.marker.setLatLng(location)
 
