@@ -1,6 +1,7 @@
 export class Start extends HTMLElement {
   startEl= null
   stopEl = null
+  watchId = null
   constructor() {
     super()
   }
@@ -15,15 +16,23 @@ export class Start extends HTMLElement {
 
     this.startEl.addEventListener("click", event => {
       console.log('started locating')
+      window.dispatchEvent(new CustomEvent('appstartedtracking'))
       window.app.store.session.startTime = new Date()
-      window.app.map.locate({ watch: true, setView: true, maxZoom: 16, enableHighAccuracy: false })
+      this.watchId = navigator.geolocation.watchPosition((e) => {
+        window.dispatchEvent(new CustomEvent('apppostionchange', { detail: e }))
+        console.log(e)
+      }, (e) => {
+        console.error(e)
+      }, { enableHighAccuracy: true, })
+      // window.app.map.locate({ watch: true, setView: true, maxZoom: 16, enableHighAccuracy: false })
 
       this.toggleControls()
     })
 
     this.stopEl.addEventListener("click", event => {
       console.log('stopped locating')
-      window.app.map.stopLocate()
+      // window.app.map.stopLocate()
+      navigator.geolocation.clearWatch(this.watchId)
       window.app.store.session.endTime = new Date()
       window.dispatchEvent(new CustomEvent('appstoppedtracking'))
       window.app.router.goTo('/summary')

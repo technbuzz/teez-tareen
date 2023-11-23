@@ -16,9 +16,13 @@ export class Currently extends HTMLElement {
   connectedCallback() {
     const renderPolyline = this.initPolyline()
     window.app.map.addLayer(this.marker)
-    window.app.map.on('locationfound', (e) => {
+    // window.app.map.on('locationfound', (e) => {
+    window.addEventListener('apppostionchange', (e) => {
       // const location = e.target.getCenter() 
-      const location = e.latlng
+      // const location = e.latlng
+      const { latitude: lat, longitude: lng} = e.detail.coords
+      const location = [lat, lng] 
+      window.app.map.setView(location)
       this.locations.push(location)
       this.marker.setLatLng(location)
 
