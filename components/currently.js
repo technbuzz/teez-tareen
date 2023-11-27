@@ -4,11 +4,13 @@ export class Currently extends HTMLElement {
   locations = []
 
   marker = L.marker([51.5, -0.09]).addTo(window.app.map) 
+  polyline = null
   constructor() {
     super()
 
     window.addEventListener('appstoppedtracking', (e) => {
       console.log('app stopped tracking')
+      window.app.store.session.latLngs = this.polyline.getLatLngs()
       this.locations = []
     })
   }
@@ -45,7 +47,7 @@ export class Currently extends HTMLElement {
     const group = L.featureGroup().addTo(window.app.map)
     return (locations) => {
       group.clearLayers()
-      const polyline = L.polyline(locations, {color: 'red'}).addTo(group)
+      this.polyline = L.polyline(locations, {color: 'red'}).addTo(group)
     }
       
   }
