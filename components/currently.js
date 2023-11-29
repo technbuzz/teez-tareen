@@ -3,7 +3,7 @@ import { Debug } from "./debug.js"
 export class Currently extends HTMLElement {
   locations = []
 
-  marker = L.marker([51.5, -0.09]).addTo(window.app.map) 
+  marker = L.marker([51.5, -0.09]).addTo(window.app.map)
   polyline = null
   constructor() {
     super()
@@ -22,15 +22,17 @@ export class Currently extends HTMLElement {
     window.addEventListener('apppostionchange', (e) => {
       // const location = e.target.getCenter() 
       // const location = e.latlng
-      const { latitude: lat, longitude: lng} = e.detail.coords
-      const location = [lat, lng] 
+      const { latitude: lat, longitude: lng } = e.detail.coords
+      const location = [lat, lng]
       window.app.map.setView(location)
       this.locations.push(location)
       this.marker.setLatLng(location)
 
-      const debug = document.createElement('app-debug')
-      debug.setAttribute('text', JSON.stringify(location))
-      document.body.appendChild(debug)
+      if (this.supportsPopover()) {
+        const debug = document.createElement('app-debug')
+        debug.setAttribute('text', JSON.stringify(location))
+        document.body.appendChild(debug)
+      }
 
 
       renderPolyline(this.locations)
@@ -47,11 +49,15 @@ export class Currently extends HTMLElement {
     const group = L.featureGroup().addTo(window.app.map)
     return (locations) => {
       group.clearLayers()
-      this.polyline = L.polyline(locations, {color: 'red'}).addTo(group)
+      this.polyline = L.polyline(locations, { color: 'red' }).addTo(group)
     }
-      
+
   }
-  
+
+  supportsPopover() {
+    return HTMLElement.prototype.hasOwnProperty('popover')
+  }
+
 }
 
 customElements.define('app-currently', Currently)

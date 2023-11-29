@@ -17,8 +17,6 @@ export class Debug extends HTMLElement {
     this.el.showPopover()
 
     setTimeout(() => {
-      // this.el.hidePopover()
-      // this.el.remove()
       this.remove()
     }, 3000);
   }
